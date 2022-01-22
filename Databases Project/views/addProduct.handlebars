@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<div class="dropdown" id="customers">
+    <button class="dropbtn">
+    <a href="/">Back to Directory</a>
+    </button>
+</div>
+
+<div id="form">
+<form  method="post">
+        <fieldset>
+                <legend> Add a New Product</legend>
+                <label for="vid">Vendor:</label>
+                <select name="vid" id="vid">
+                        <option value="">Select Products by Vendor</option>
+                        {{#each vendors}}
+                        <option value="{{this.vendorID}}">{{this.name}}</option>
+                        {{/each}}
+                </select>
+                <br>
+                <label for="cid">Category:</label>
+                <select name="cid" id="cid">
+                        <option value="">Select Products by Category</option>
+                        {{#each categories}}
+                        <option value="{{this.categoryID}}">{{this.name}}</option>
+                        {{/each}}
+                </select>
+                <br>
+                <label>Product Name:
+                        <input type="text" id="pname" name="pname" size="30" maxlength="100">
+                </label>
+                <br>
+                <label>Company Cost:
+                        <input type="number" id="companyCost" name="companyCost" size="30" maxlength="100">
+                </label>
+                <br>
+                <label>Sale Price:
+                        <input type="number" id="salePrice"  name="salePrice" size="30" maxlength="100">
+                </label>
+                <br>
+                <label>Expiration Date:
+                <input type="date" id="expirationDate" name="expirationDate" size="30" maxlength="100">
+                </label>
+                <br>
+                <label>Stock Quantity:
+                        <input type="number" id="stockQuant" name="stockQuant" size="30" maxlength="100">
+                </label>
+                <br>
+                <br>
+                <button id="productSubmit" type="button" style="display:block">Add Product</button>
+                <div id="statusUpdate" style="color: white;"></div>
+        </fieldset>
+</form>
+</div>
+
+<script>
+document.getElementById("productSubmit").addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {vid:null, cat:null, name:null, companyCost:null, salePrice:null, expirationDate:null, stockQuant:null};
+        payload.vid = document.getElementById('vid').value
+        payload.cat = document.getElementById('cid').value
+        payload.name = document.getElementById('pname').value
+        payload.companyCost = document.getElementById('companyCost').value
+        payload.salePrice = document.getElementById('salePrice').value
+        payload.expirationDate = document.getElementById('expirationDate').value
+        payload.stockQuant = document.getElementById('stockQuant').value
+        req.open("POST", "http://flip1.engr.oregonstate.edu:7715/new-product", true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.addEventListener("load", function(){
+                if (req.status >= 200 && req.status < 400){
+                        var response = JSON.parse(req.responseText);
+                        document.getElementById("statusUpdate").textContent = "Product Added!";
+                } else {
+                        console.log("Error in network request: " + req.statusText)
+                }
+        });
+
+req.send(JSON.stringify(payload));
+event.preventDefault();
+});
+</script>

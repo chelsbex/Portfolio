@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<div class="dropdown" id="customers">
+    <button class="dropbtn">
+        <a href="/">Back to Directory</a>
+    </button>
+</div>
+
+<div id="form" style="width: 100%;">
+<form method="post">
+        <fieldset>
+                <legend> Update Product Information</legend>
+                <table class="table" style="width: 100%;">
+                        <thead>
+                                <tr class="tRow">
+                                        {{#each data.[0]}}
+                                        <th>{{@key}}</th>
+                                        {{/each}}
+                                        <th>Submit?</th>
+                                        <th>Status</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                {{#each data}}
+                                <tr class="tRow">
+                                        <td>{{this.productID}}
+                                                <input type="hidden" id="productID" value={{this.productID}}>
+                                        </td>
+                                        <td><input type="number" id="vname" name="vname" value="{{this.vid}}" style="width: 40px;" maxlength="100"></td>
+                                        <td><input type="number" id="cid" name="cid" value="{{this.catid}}" style="width: 40px;" maxlength="100"></td>
+                                        <td><input type="text" id="pname" name="pname" value="{{this.name}}" maxlength="100"></td>
+                                        <td><input type="number" id="companyCost" name="companyCost" value="{{this.companyCost}}" style="width: 70px;" maxlength="100"></td>
+                                        <td><input type="number" id="salePrice" name="salePrice" value="{{this.salePrice}}" style="width: 70px;" maxlength="100"></td>
+                                        <td><input type="date" id="expirationDate" name="expirationDate"  value="{{this.expirationDate}}"></td>
+                                        <td><input type="number" id="stockQuant"name="stockQuant" value="{{this.stockQuant}}" style="width: 40px;" maxlength="100"></td>
+                                        <td><button id="productSubmit" type="button" style="display:block">Update Product</button></td>
+                                        <td id="statusUpdate" style="color: white;"></td>
+                                </tr>
+                                {{/each}}
+                        </tbody>
+                </table>        
+        </fieldset>
+</form>
+</div>
+
+<div id="statusUpdate"></div>
+
+
+<script>
+document.getElementById("productSubmit").addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {productID: null, vid:null, catid:null, name:null, companyCost:null, salePrice:null, expirationDate:null, stockQuant:null};
+        payload.productID = document.getElementById('productID').value
+        payload.vid = document.getElementById('vname').value
+        payload.catid = document.getElementById('cid').value
+        payload.name = document.getElementById('pname').value
+        payload.companyCost = document.getElementById('companyCost').value
+        payload.salePrice = document.getElementById('salePrice').value
+        payload.expirationDate = document.getElementById('expirationDate').value
+        payload.stockQuant = document.getElementById('stockQuant').value
+        req.open("POST", "http://flip1.engr.oregonstate.edu:7715/update-product-action", true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.addEventListener("load", function(){
+                if (req.status >= 200 && req.status < 400){
+                        var response = JSON.parse(req.responseText);
+                        document.getElementById("statusUpdate").textContent = "Product Updated!";
+                } else {
+                        console.log("Error in network request: " + req.statusText)
+                }
+        });
+
+req.send(JSON.stringify(payload));
+event.preventDefault();
+});
+</script>

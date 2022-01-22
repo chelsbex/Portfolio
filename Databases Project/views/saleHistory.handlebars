@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<div class="dropdown" id="customers">
+		<button class="dropbtn">
+		<a href="/">Back to Directory</a>
+	</button>
+</div>
+<div>
+	<div  id="form">
+		<form method="get" action="http://flip1.engr.oregonstate.edu:7715/sale-history">
+			<fieldset>
+				<legend>View Sale History</legend>
+  				<label for="cid">Search by Customer:</label>
+  				<select name="cid" id="cid">
+		  	        <option value="">Select a Customer</option>
+			        {{#each customers}}
+			        <option value="{{this.customerID}}">{{this.name}}</option>
+			        {{/each}}
+				</select><br>
+  				<label for="saleID">Search by Sale:</label>
+  				<select name="saleID" id="saleID">
+		  	        <option value="">Select a Sale by Date</option>
+			        {{#each data}}
+			        <option value="{{this.saleID}}">{{this.saleDate}}</option>
+			        {{/each}}
+				</select><br>
+  				<label for="minTotal">Restrict Transaction Amount:</label>
+  				<input type="text" id="minTotal" name="minTotal">-
+  				<input type="text" id="maxTotal" name="maxTotal"><br>
+				<label for="earlyDate">Restrict Date Range:</label>
+  				<input type="date" id="earlyDate" name="earlyDate">-
+  				<input type="date" id="lateDate" name="lateDate"><br>
+  				<label for="paymentMethod">Filter by Payment Method: </label>
+			    	<select name="paymentMethod" id="paymentMethod">
+			    		<option value="">Filter by Payment Method</option>
+	    				<option value="">Payment Method</option>
+	    				<option value="Credit Card">Credit Card</option>
+					    <option value="Check">Check</option>
+					    <option value="Purchase Order">Purchase Order</option>
+					    <option value="Paypal">Paypal</option>
+					</select>
+  				<input id="formSubmit" type="submit" name="Display History"></input>
+  			</fieldset>
+		</form>
+	</div>
+	<div id="reset"><a href='/sale-history'><button>Reset Search</button></a></div>
+	<div class="queryTable">
+		<table class="table">
+			<thead>
+				<tr class="tRow">
+					{{#each data.[0]}}
+					<th>{{@key}}</th>
+					{{/each}}
+				</tr>
+			</thead>
+			<tbody id="entries">
+				{{#each data}}
+				<tr class="tRow">
+					<td>{{this.cid}}</td>
+					<td>{{this.custName}}</td>
+					<td>{{this.saleID}}</td>
+					<td>{{this.saleDate}}</td>
+					<td>{{this.totalPrice}}</td>
+					<td>{{this.paymentMethod}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>	
+	</div>
+</div>

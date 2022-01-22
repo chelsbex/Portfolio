@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<div class="dropdown" id="customers">
+    <button class="dropbtn">
+    <a href="/">Back to Directory</a>
+  	</button>
+</div>
+
+<div id="form">
+<form method="post">
+        <fieldset>
+                <legend> Add a New Vendor</legend>
+                <label>Vendor Name:
+                        <input type="text"id="name"  name="name" size="30" maxlength="100">
+                </label>
+                <br>
+                <label>Vendor Email:
+                        <input type="email" id="email" name="email" size="30" maxlength="100">
+                </label>
+                <br>
+                <label for="vendorDescription">Vendor Description:</label>
+                <br>
+                <textarea rows="3" cols="30" id="vendorDescription"></textarea>
+                <br>
+                <br>
+                <button id="vendorSubmit" type="button" style="display:block">Add Vendor</button>
+                <div id="statusUpdate" style="color: white;"></div>
+        </fieldset>
+</form>
+</div>
+<script>
+document.getElementById("vendorSubmit").addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {name:null, email:null, vendorDescription:null};
+        payload.name = document.getElementById('name').value
+        payload.email = document.getElementById('email').value
+        payload.vendorDescription = document.getElementById('vendorDescription').value
+        req.open("POST", "http://flip1.engr.oregonstate.edu:7715/new-vendor", true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.addEventListener("load", function(){
+                if (req.status >= 200 && req.status < 400){
+                        var response = JSON.parse(req.responseText);
+                        document.getElementById("statusUpdate").textContent = "Vendor Added!";
+                } else {
+                        console.log("Error in network request: " + req.statusText)
+                }
+        });
+
+req.send(JSON.stringify(payload));
+event.preventDefault();
+});
+</script>

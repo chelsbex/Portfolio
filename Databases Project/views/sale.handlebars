@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<div class="dropdown" id="customers">
+		<button class="dropbtn">
+		<a href="/">Back to Directory</a>
+	</button>
+</div>
+<div id="form">
+	<div id = "saleForm" style="padding: 15px;">
+		<form method="post" class="transaction">
+			<fieldset>
+				<legend>Create a Sale</legend>
+	  			<div>
+		    		<label for="cid">Customer ID:</label>
+		    		<select name="cid" id="cid" required>
+			  	        <option value="">Select a Customer</option>
+				        {{#each customers}}
+				        <option value="{{this.customerID}}">{{this.name}}</option>
+				        {{/each}}
+					</select><br>
+					<label for="date">Date:</label>
+		    		<input type="date" id="saleDate" name="saleDate">
+	  			</div>
+	    		<div>
+			    	<label for="paymentMethod">Customer payment method: </label>
+			    	<select name="paymentMethod" id="paymentMethod" required>
+	    				<option value="">Payment Method</option>
+	    				<option value="Credit Card">Credit Card</option>
+					    <option value="Check">Check</option>
+					    <option value="Purchase Order">Purchase Order</option>
+					    <option value="Paypal">Paypal</option>
+					</select>
+			  	</div>
+			  	<div>
+			    	<button  id="saleSubmit" type="button" style="display:block;">Create Sale</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div id="transactionDisplay" style="display: none;">
+		<div id="transactionHeader">
+			<table cellpadding="0" cellspacing="0">
+				<tr class="top">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td>Sale ID #: </td> 
+								<td id="newsid"></td>
+							</tr>
+							<tr>
+								<td>Sale Date: </td>
+								<td id="newsaleDate"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr class="information">
+					<td>Customer ID: </td> 
+					<td id="newcid"></td>
+				</tr>
+				<tr>
+					<td>Total Price: $</td>
+					<td id="newtotalPrice"></td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<table class="table">
+				<thead>
+					<tr class="tRow">
+						<th>Product ID</th>
+						<th>Unit Price ($)</th>
+						<th>Quantity</th>
+						<th>Total Price ($)</th> 
+						<th>Delete?</th>
+					</tr>	
+				</thead>
+				<tbody id="itemizedSale">
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id=addProduct style="display: none;">
+		<form>
+			<fieldset>
+				<legend>Add a Product to the Sale</legend>
+				<div>
+	    			<label for="pid">Product ID:</label>
+					<select name="pid" id="pid" required>
+			  	        <option value="">Select a Product</option>
+				        {{#each products}}
+				        <option value="{{this.productID}}">{{this.name}}</option>
+				        {{/each}}
+					</select><br>
+	    			<input id="sid" name="sid" type="hidden">
+	    			<label for="quantity">Quantity:</label>
+	    			<input type="number" name="quantity" id="quantity" required>
+	  			</div>
+				<div>
+			    	<button  id="itemAdd" type="button" style="display:block;">Submit</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+<script src="saleCS.js"></script>	

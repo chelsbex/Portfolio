@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<div class="dropdown" id="customers">
+		<button class="dropbtn">
+		<a href="/">Back to Directory</a>
+	</button>
+</div>
+<div>
+	<div  id="form">
+		<form method="get" action="http://flip1.engr.oregonstate.edu:7715/profit-analysis">
+			<fieldset>
+				<legend>Perform Profit Analysis</legend>
+				<label for="pid">Search by Product:</label>
+  				<select name="pid" id="pid">
+		  	        <option value="">Select a Product</option>
+			        {{#each data}}
+			        <option value="{{this.pid}}">{{this.name}}</option>
+			        {{/each}}
+				</select><br>
+  				<label for="vid">Search by Vendor:</label>
+  				<select name="vid" id="vid">
+		  	        <option value="">Select a Vendor</option>
+			        {{#each data}}
+			        <option value="{{this.vid}}">{{this.vendName}}</option>
+			        {{/each}}
+				</select><br>
+  				<label for="catName">Search by Category:</label>
+				<select name="catName" id="catName">
+		  	        <option value="">Select a Category</option>
+			        {{#each categories}}
+			        <option value="{{this.name}}">{{this.name}}</option>
+			        {{/each}}
+				</select><br>
+				<label for="earlyDate">Restrict Date Range:</label>
+  				<input type="date" id="earlyDate" name="earlyDate"></input>-
+  				<input type="date" id="lateDate" name="lateDate"></input><br>
+  				<input id="formSubmit" type="submit" name="Display History"></input>
+  			</fieldset>
+  		</form>
+	</div>
+	<div id="reset"><a href='/profit-analysis'><button>Reset Search</button></a></div>
+	<div class="queryTable">
+		<table class="table">
+			<thead>
+				<tr class="tRow">
+					{{#each data.[0]}}
+					<th>{{@key}}</th>
+					{{/each}}
+				</tr>
+			</thead>
+			<tbody>
+				{{#each data}}
+				<tr class="tRow">
+					<td>{{this.pid}}</td>
+					<td>{{this.name}}</td>
+					<td>{{this.catName}}</td>
+					<td>{{this.vid}}</td>
+					<td>{{this.vendName}}</td>
+					<td>{{this.totalSales}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>	
+	</div>
+</div>

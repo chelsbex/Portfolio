@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<div class="dropdown" id="customers">
+		<button class="dropbtn">
+		<a href="/">Back to Directory</a>
+	</button>
+</div>
+<div>
+	<div  id="form">
+		<form method="get" action="http://flip1.engr.oregonstate.edu:7715/purchase-history">
+			<fieldset>
+				<legend>View Purchase History</legend>
+  				<label for="vid">Search by Vendor:</label>
+  				<select name="vid" id="vid">
+		  	        <option value="">Select a Vendor</option>
+			        {{#each vendors}}
+			        <option value="{{this.vendorID}}">{{this.name}}</option>
+			        {{/each}}
+				</select><br>
+  				<label for="catName">Search by Category:</label>
+				<select name="catName" id="catName">
+		  	        <option value="">Select a Category</option>
+			        {{#each categories}}
+			        <option value="{{this.name}}">{{this.name}}</option>
+			        {{/each}}
+				</select><br>
+  				<label for="minTotal">Restrict Expense Amount:</label>
+  				<input type="text" id="minTotal" name="minTotal" value="">-
+  				<input type="text" id="maxTotal" name="maxTotal" value=""><br>
+				<label for="earlyDate">Restrict Date Range:</label>
+  				<input type="date" id="earlyDate" name="earlyDate" value="">-
+  				<input type="date" id="lateDate" name="lateDate" value=""><br>
+  				<input id="formSubmit" type="submit" name="Display History"></input>
+  			</fieldset>
+		</form>
+	</div>
+	<div id="reset"><a href='/purchase-history'><button>Reset Search</button></a></div>
+	<div class="queryTable">
+		<table class="table">
+			<thead>
+				<tr class="tRow">
+					{{#each data.[0]}}
+					<th>{{@key}}</th>
+					{{/each}}
+				</tr>
+			</thead>
+			<tbody id="entries">
+				{{#each data}}
+				<tr class="tRow">
+					<td>{{this.vid}}</td>
+					<td>{{this.vendName}}</td>
+					<td>{{this.purchaseID}}</td>
+					<td>{{this.purchaseDate}}</td>
+					<td>{{this.totalPaid}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>	
+	</div>
+</div>

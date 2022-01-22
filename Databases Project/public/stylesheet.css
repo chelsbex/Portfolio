@@ -1,0 +1,186 @@
+h1 {
+	position: relative;
+	top: 90px;
+	left: 20px;
+}
+
+#homeBar {
+	width:100%;
+	height:90px;
+	background-color:#FFB6C1;
+	position:relative;
+	top:20px;
+	left:0px;
+}
+
+#customers {
+	width:10%;
+	height:30px;
+	position:absolute;
+	top:20px;
+	left:5%;
+	text-align:center;
+	vertical-align: middle;
+}
+
+#vendors {
+	width:10%;
+	height:30px;
+	position:absolute;
+	top:20px;
+	left:23%;
+	text-align:center;
+	vertical-align: middle;
+}
+
+#products {
+	width:10%;
+	height:30px;
+	position:absolute;
+	top:20px;
+	left:41%;
+	text-align:center;
+}
+
+#transactions {
+	width:10%;
+	height:30px;
+	position:absolute;
+	top:20px;
+	left:59%;
+	text-align:center;
+}
+
+#read {
+	width:10%;
+	height:30px;
+	position:absolute;
+	top:20px;
+	left:77%;
+	text-align:center;
+}
+
+#dropdown {
+	width:10%;
+	height:30px;
+	position:absolute;
+	top:20px;
+	text-align:center;
+}
+
+a {
+	font-family: Lucinda Console, Courier New, monospace;
+	color: white;
+}
+
+/* Dropdown Button - dropdown tutorial from w3schools.com  */
+.dropbtn {
+	background-color: #DB7093;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+	color: #800000;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #800000;}
+
+body{
+	background-color: #e6ffe6;
+}
+
+#form {
+	position: relative;
+	background-color: #DB7093;
+	display: block;
+	top:100px;
+}
+
+legend {
+	font-size: 40px;
+	color:white;
+}
+
+label {
+	color: white;
+}
+
+textarea, option, select, input {
+	background-color: white;
+}
+
+#transactionDisplay {
+	font-family: Lucinda Console, Courier New, monospace;
+	color: white;
+	padding: 16px;
+}
+
+.tableDisplay, .queryTable {
+	font-family: Lucinda Console, Courier New, monospace;
+	color: white;
+	padding: 16px;
+}
+
+.table, .tRow {
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+.tRow td {
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+.tRow th {
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+#transactionHeader {
+	margin-bottom: 20px;
+}
+
+.queryTable {
+	position: relative;
+	background-color: #DB7093;
+	top:140px;
+	width: 75%;
+}
+
+#reset {
+	position: relative;
+	background-color: #DB7093;
+	top:110px;
+	padding: 5px;
+	width: 60px;
+}
